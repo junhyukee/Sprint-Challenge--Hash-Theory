@@ -31,6 +31,8 @@
 > One of your instructors was once hired to implement VT-100 emulation
 > in an app, and they used a state machine to do it.
 
+![state machine](statemachine.png)
+
 ## Computation
 
 Fill out truth tables for the following expressions:
@@ -101,15 +103,17 @@ How can you represent the SUM and CARRY of adding THREE digits with a truth tabl
 ```
 A     B     C      carry   sum
 --------------------------------
-0     0     0        ?      ?
-0     0     1        ?      ?
-0     1     0        ?      ?
-0     1     1        ?      ?
-1     0     0        ?      ?
-1     0     1        ?      ?
-1     1     0        ?      ?
-1     1     1        ?      ?
+0     0     0        0      0
+0     0     1        0      1
+0     1     0        0      1
+0     1     1        1      0
+1     0     0        0      1
+1     0     1        1      0
+1     1     0        1      0
+1     1     1        1      1
 ```
 
-- SUM = ?
-- CARRY = ?
+- SUM = A ^ (B ^ C)
+  - Makes sure that there are odd number of 1s
+- CARRY = A && B || (B && C || A && C)
+  - Makes sure that there are more than 2 1s
